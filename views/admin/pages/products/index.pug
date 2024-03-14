@@ -25,9 +25,9 @@ block main
                     th Trang Thai 
                     th Hanh dong 
             tbody 
-                each item in product 
+                each item, index in product 
                     tr 
-                        td #{item.position}
+                        td #{index+1}
                             img( src=item.thumbnail alt=""
                             width="100px"
                             height="auto"
@@ -42,4 +42,21 @@ block main
                         td 
                             button(class="btn btn-warning btn-sm") Sua
                             button(class="btn btn-danger btn-sm") Xoa
+    nav
+        ul(class="pagination")
+            if(pagination.currentPage > 1)
+                li(class="page-item")
+                    button(button-pagination=pagination.currentPage-1 class="page-link") Previous
+            div  
+            - for (var i = 1; i<= pagination.totalPage; i++)
+                li(class=`page-item ${pagination.currentPage == i ?"active":""}`)
+                    button(button-pagination=i class="page-link active") #{i}
+            if(pagination.currentPage < pagination.totalPage)
+                li(class="page-item")
+                    button(button-pagination=pagination.currentPage+1 class="page-link") Next
+                 
+
+            
+        
+     
                     
