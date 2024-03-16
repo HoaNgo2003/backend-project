@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 require("dotenv").config();
+const bodyParser = require('body-parser');
 const database = require("./config/database");
 database.connect();
 const systemConfig = require("./config/system");
@@ -11,6 +12,7 @@ const routeAdmin = require("./routes/admin/index.route");
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
+app.use(bodyParser.urlencoded({extended:false}));
 app.set('views','./views');
 app.set('view engine','pug');
 route(app);

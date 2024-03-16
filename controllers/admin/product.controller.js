@@ -45,3 +45,22 @@ const countProduct = await Product.countDocuments(find);
     await Product.updateOne({_id: id},{status: status});
     res.redirect('back');
   }
+  module.exports.changeMulti= async(req, res)=>{
+    const type = req.body.type;
+    const ids = req.body.ids.split(",");
+    switch(type){
+      case "active":
+        await Product.updateMany({_id: {
+          $in: ids
+        }},{status:"active"});
+        break;
+      case "unactive":
+        await Product.updateMany({_id: {
+          $in: ids
+        }},{status:"unactive"});
+        break;
+      default:
+        break;
+    }
+    res.redirect("back");
+  }

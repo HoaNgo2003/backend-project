@@ -48,6 +48,57 @@ if(pagination){
     })
 }
 //done
-// status
+//checkbox
+const checkBox = document.querySelector("[checkbox-multi]");
+if(checkBox){
+    const inputCheck = checkBox.querySelector("input[name='checkall']");
+    const inputId = checkBox.querySelectorAll("input[name='id']");
+    inputCheck.addEventListener("click",()=>{
+        if(inputCheck.checked){
+             inputId.forEach(inputCheck =>{
+                inputCheck.checked = true;
+             })
+        }else{
+            inputId.forEach(inputCheck=>{
+                inputCheck.checked = false;
+             })
+        }
+    });
+    inputId.forEach(input=>{
+         
+        input.addEventListener("click",()=>{
+        const  count = checkBox.querySelectorAll("input[name='id']:checked").length;
+          if(count==inputId.length){
+            inputCheck.checked = true;
+        }else{
+            inputCheck.checked = false;
+        }
+        });
+       
+        
+    });
 
+};
+const formChangeMulti = document.querySelector("[form-change-multi]");
+if(formChangeMulti){
+    formChangeMulti.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        const checkBox = document.querySelector("[checkbox-multi]");
+        const inputChecked = checkBox.querySelectorAll(
+            "input[name='id']:checked"
+        );
+        if(inputChecked.length>0){
+            let id = [];
+            const inputFiled = formChangeMulti.querySelector("input[name='ids']");
+            inputChecked.forEach(item=>{
+                const id1 = item.value;
+                id.push(id1);
+            })
+            inputFiled.value = id.join(",");
+            formChangeMulti.submit();
+        }else{
+            alert("Vui long chon it nhat mot ban ghi")
+        }
+    })
+}
 //done
