@@ -64,3 +64,8 @@ const countProduct = await Product.countDocuments(find);
     }
     res.redirect("back");
   }
+  module.exports.deleteItem = async(req, res)=>{
+    const id = req.params.id;
+    await Product.deleteOne({_id:id});
+    res.redirect("back");
+  }
