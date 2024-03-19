@@ -59,6 +59,14 @@ const countProduct = await Product.countDocuments(find);
           $in: ids
         }},{status:"unactive"});
         break;
+      case "delete":
+        await Product.updateMany({_id:{
+          $in: ids
+        }},{delete:true});
+      case "changePosition":
+        // await Product.updateMany({_id:id},{
+
+        // })
       default:
         break;
     }
@@ -66,6 +74,7 @@ const countProduct = await Product.countDocuments(find);
   }
   module.exports.deleteItem = async(req, res)=>{
     const id = req.params.id;
-    await Product.deleteOne({_id:id});
+    await Product.updateOne({_id:id},{delete:true,
+      deleteAt:new Date()});
     res.redirect("back");
   }

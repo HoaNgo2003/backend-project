@@ -87,6 +87,13 @@ if(formChangeMulti){
         const inputChecked = checkBox.querySelectorAll(
             "input[name='id']:checked"
         );
+        const typeChange = e.target.elements.type.value;
+        if(typeChange=="delete"){
+            const isConfirm = confirm("Xac nhan lai co chan muon xoa khong?");
+            if(!isConfirm){
+                return;
+            }
+        }
         if(inputChecked.length>0){
             let id = [];
             const inputFiled = formChangeMulti.querySelector("input[name='ids']");
@@ -97,7 +104,7 @@ if(formChangeMulti){
             inputFiled.value = id.join(",");
             formChangeMulti.submit();
         }else{
-            alert("Vui long chon it nhat mot ban ghi")
+            alert("Vui long chon it nhat mot ban ghi")//
         }
     })
 }
